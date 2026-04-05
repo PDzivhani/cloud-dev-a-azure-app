@@ -1,0 +1,7 @@
+/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/publish/MyFirstAzureWebAppNet8
+/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/publish/appsettings.Development.json
+/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/publish/appsettings.json
+/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/publish/MyFirstAzureWebAppNet8.dll
+/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/publish/MyFirstAzureWebAppNet8.deps.json
+/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/publish/MyFirstAzureWebAppNet8.runtimeconfig.json
+/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/publish/MyFirstAzureWebAppNet8.pdb
