@@ -1,10 +1,12 @@
-# cloud-dev-a-azure-app
 # My First Azure Web App ☁️
 
-This is my first .NET web application deployed to Microsoft Azure App Service as part of my Cloud Development A learning journey.
+This project is my first .NET web application deployed to Microsoft Azure App Service as part of my Cloud Development A journey.
 
 ## Live Demo
-[coco-cloud-dev.azurewebsites.net](https://coco-cloud-dev.azurewebsites.net)
+[View the live app](https://coco-cloud-dev.azurewebsites.net)
+
+## Repository
+[View the GitHub repository](PASTE-YOUR-GITHUB-REPO-LINK-HERE)
 
 ## Built With
 - .NET 8
@@ -17,13 +19,13 @@ This is my first .NET web application deployed to Microsoft Azure App Service as
 - How to create and manage Azure resources
 - How to deploy a web app to Azure App Service
 - How to troubleshoot runtime and deployment issues
+- How to publish a working app to the cloud
 
-## Project Goal
-The purpose of this project was to gain practical experience with cloud deployment and begin building confidence with Azure as part of my semester module, Cloud Development A.
+## Project Purpose
+The purpose of this project was to gain practical experience in Azure cloud development and build confidence with deploying .NET applications to the cloud.
 
 ## Future Improvements
 - Add a database
-- Improve UI styling
-- Add project sections for cloud concepts learned
-- Explore Azure Storage and Azure SQL integration
-
+- Improve the UI further
+- Add more Azure services
+- Expand the app beyond the starter structure

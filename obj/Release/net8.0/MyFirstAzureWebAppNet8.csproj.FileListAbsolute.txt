@@ -13,6 +13,7 @@
 /Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/MyFirstAzureWebAppNet8.AssemblyInfo.cs
 /Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/MyFirstAzureWebAppNet8.csproj.CoreCompileInputs.cache
 /Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/MyFirstAzureWebAppNet8.MvcApplicationPartsAssemblyInfo.cache
+/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/MyFirstAzureWebAppNet8.sourcelink.json
 /Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/rjimswa.dswa.cache.json
 /Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/rjsmrazor.dswa.cache.json
 /Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/rjsmcshtml.dswa.cache.json
@@ -30,4 +31,3 @@
 /Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/MyFirstAzureWebAppNet8.pdb
 /Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/MyFirstAzureWebAppNet8.genruntimeconfig.cache
 /Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/ref/MyFirstAzureWebAppNet8.dll
-/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/obj/Release/net8.0/MyFirstAzureWebAppNet8.sourcelink.json
