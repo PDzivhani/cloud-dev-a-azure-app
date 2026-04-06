@@ -268,3 +268,47 @@ h1:focus {
 .delete-btn:hover {
     background-color: #b91c1c;
 }
+
+/* DASHBOARD STYLING */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.stat-card h2 {
+    margin: 0.4rem 0 0;
+    font-size: 2rem;
+    color: #0f172a;
+}
+
+.stat-label {
+    margin: 0;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.dashboard-section {
+    margin-top: 2rem;
+}
+
+.latest-entry-card h3 {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+}
