@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using MyFirstAzureWebAppNet8.Models;
+namespace MyFirstAzureWebAppNet8.Data;
 
-public class CloudCanvasDbContextt: DbContext
+public class CloudCanvasDbContext: DbContext
 {
-    public CloudCanvasDbContextt(DbContextOptions<CloudCanvasDbContextt> options) : base(options)
+    public CloudCanvasDbContext(DbContextOptions<CloudCanvasDbContext> options) : base(options)
     {
     }
 

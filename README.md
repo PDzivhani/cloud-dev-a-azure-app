@@ -6,7 +6,7 @@ This project is my first .NET web application deployed to Microsoft Azure App Se
 [View the live app](https://coco-cloud-dev.azurewebsites.net)
 
 ## Repository
-[View the GitHub repository](PASTE-YOUR-GITHUB-REPO-LINK-HERE)
+[View the GitHub repository](https://github.com/PDzivhani/cloud-dev-a-azure-app)
 
 ## Built With
 - .NET 8

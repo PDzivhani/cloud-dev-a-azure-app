@@ -1,0 +1,86 @@
+@using MyFirstAzureWebAppNet8.Data
+@using MyFirstAzureWebAppNet8.Models
+@rendermode InteractiveServer
+
+@page "/learning-entries"
+@inject CloudCanvasDbContext Context
+@using Microsoft.EntityFrameworkCore
+
+
+<PageTitle>Learning Entries</PageTitle>
+
+<h1>Learning Entries</h1>
+<p class="page-intro">
+    This page will display a list of learning entries that I have created as part of my Azure learning journey.
+    Each entry represents a specific topic or concept that I have explored and documented.
+</p>
+
+<div class="page-actions">
+    <a class="primary-btn" href="/learning-entries/add">Add New Entry</a>
+</div>
+
+@if (entries == null){
+    <p>Loading entries...</p>
+}
+else if (!entries.Any())
+{
+    <div class="empty-state">
+        <h3>No Learning entries yet</h3>
+        <p>Click the button above to add your first entry!</p>
+    </div>
+}
+else
+{
+    <div class="entries-grid">
+        @foreach (var entry in entries.OrderByDescending(e => e.DateCreated))
+        {
+            <div class ="entry-card">
+                <div class="entry-meta">
+                    <span class="entry-category">@entry.Category</span>
+                    <span class="entry-date">@entry.DateCreated.ToLocalTime().ToString("dd-MMM-yyyy")</span>
+                </div>
+
+                <h3>@entry.Title</h3>
+                <p><strong>Module:</strong>@entry.Module</p>
+                <p><strong>Topic:</strong>@entry.Topic</p>
+                <p class="entry-content">@entry.Content</p>
+
+                @if (!String.IsNullOrWhiteSpace(entry.Tags))
+                {
+                    <p class="entry-tags"><strong>Tags:</strong> @entry.Tags</p>
+                }
+
+                <div class="entry-actions">
+                    <a href="/learning-entries/edit/@entry.Id" class="secondary-btn">Edit</a>
+                    <button type="button" class="delete-btn" @onclick="() => DeleteEntry(entry.Id)">Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<LearningEntry>? entries;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadEntries();
+    }
+
+    private async Task LoadEntries()
+    {
+        entries = await Context.LearningEntries.ToListAsync();
+    }
+
+    private async Task DeleteEntry(int id)
+    {
+        var entryToDelete = await Context.LearningEntries.FindAsync(id);
+        if (entryToDelete != null)
+        {
+            Context.LearningEntries.Remove(entryToDelete);
+            await Context.SaveChangesAsync();
+            await LoadEntries();
+        }
+    }
+}
+

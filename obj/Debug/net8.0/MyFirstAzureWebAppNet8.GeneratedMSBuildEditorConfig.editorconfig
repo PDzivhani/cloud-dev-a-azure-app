@@ -26,8 +26,16 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/Components/Pages/AddLearningEntry.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZGRMZWFybmluZ0VudHJ5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db3VudGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/Components/Pages/EditLearningEntry.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FZGl0TGVhcm5pbmdFbnRyeS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/Components/Pages/Error.razor]
@@ -36,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/Components/Pages/LearningEntries.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9MZWFybmluZ0VudHJpZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/phophidzivhani/Dev/Learning/azureRookie/MyFirstAzureWebAppNet8/Components/Pages/Weather.razor]

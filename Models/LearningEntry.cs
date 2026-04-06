@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
+namespace MyFirstAzureWebAppNet8.Models;
+
 public class LearningEntry
 {
     public int Id { get; set; }

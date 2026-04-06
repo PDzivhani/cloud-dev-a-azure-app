@@ -1,0 +1,85 @@
+@page "/learning-entries/edit/{id:int}"
+@rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components.Forms
+@using MyFirstAzureWebAppNet8.Data
+@using MyFirstAzureWebAppNet8.Models
+@inject CloudCanvasDbContext Context
+@inject NavigationManager NavigationManager
+@using Microsoft.EntityFrameworkCore
+
+<PageTitle>Edit Learning Entry</PageTitle>
+
+<h1>Edit Learning Entry</h1>
+<p class="page-intro">Make changes to your learning entry and click save when you're done.</p>
+
+@if ( learningEntry is null)
+{
+    <p>
+        Loading entry details...
+    </p>
+}
+else
+{
+    <EditForm Model="learningEntry" OnValidSubmit="HandleValidSubmit" FormName="edit-learning-entry">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-card">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <InputText id="title" class="form-control" @bind-Value="learningEntry.Title" />
+        </div>
+
+        <div class="form-group">
+            <label for="module">Module</label>
+            <InputText id="module" class="form-control" @bind-Value="learningEntry.Module" />
+        </div>
+
+        <div class="form-group">
+            <label for="topic">Topic</label>
+            <InputText id="topic" class="form-control" @bind-Value="learningEntry.Topic" />
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <InputText id="category" class="form-control" @bind-Value="learningEntry.Category" />
+        </div>
+
+        <div class="form-group">
+            <label for="tags">Tags</label>
+            <InputText id="tags" class="form-control" @bind-Value="learningEntry.Tags" />
+        </div>
+
+        <div class="form-group">
+            <label for="content">Content</label>
+            <InputTextArea id="content" class="form-control" @bind-Value="learningEntry.Content" rows="6"/>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="primary-btn">Save Entry</button>
+            <a href="/learning-entries" class="secondary-btn">Back to Entries</a>
+        </div>
+    </div>
+</EditForm>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private LearningEntry? learningEntry;
+    protected override async Task OnInitializedAsync()
+    {
+        learningEntry = await Context.LearningEntries.FirstOrDefaultAsync(e => e.Id == Id);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (learningEntry is not null)
+        {
+            Context.LearningEntries.Update(learningEntry);
+            await Context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/learning-entries");
+        }
+    }
+}

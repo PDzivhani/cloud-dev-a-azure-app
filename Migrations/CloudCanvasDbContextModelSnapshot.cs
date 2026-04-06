@@ -3,19 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using MyFirstAzureWebAppNet8.Data;
 
 #nullable disable
 
 namespace MyFirstAzureWebAppNet8.Migrations
 {
-    [DbContext(typeof(CloudCanvasDbContextt))]
-    [Migration("20260406075556_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(CloudCanvasDbContext))]
+    partial class CloudCanvasDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,7 +22,7 @@ namespace MyFirstAzureWebAppNet8.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("LearningEntry", b =>
+            modelBuilder.Entity("MyFirstAzureWebAppNet8.Models.LearningEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

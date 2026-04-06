@@ -142,3 +142,129 @@ h1:focus {
     line-height: 1.8;
     max-width: 800px;
 }
+
+/* CSS FOR LEARNING ENTRIES */
+.page-intro {
+    color: #475569;
+    margin-bottom: 1.5rem;
+}
+
+.page-actions {
+    margin-bottom: 1.5rem;
+}
+
+.entries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1rem;
+}
+
+.entry-card {
+    background: white;
+    padding: 1.4rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.entry-card h3 {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+    color: #0f172a;
+}
+
+.entry-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+
+.entry-category {
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.entry-date {
+    color: #64748b;
+}
+
+.entry-content {
+    line-height: 1.7;
+    color: #334155;
+}
+
+.entry-tags {
+    margin-top: 0.8rem;
+    color: #475569;
+}
+
+.empty-state {
+    background: white;
+    padding: 2rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    text-align: center;
+}
+
+.form-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    max-width: 800px;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.45rem;
+    color: #0f172a;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: white;
+    box-sizing: border-box;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.entry-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.delete-btn {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    padding: 0.85rem 1.2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #b91c1c;
+}

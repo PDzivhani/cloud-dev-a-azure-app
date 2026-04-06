@@ -1,0 +1,69 @@
+@page "/learning-entries/add"
+@rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components.Forms
+@using MyFirstAzureWebAppNet8.Data
+@using MyFirstAzureWebAppNet8.Models
+@inject CloudCanvasDbContext Context
+@inject NavigationManager NavigationManager
+@using Microsoft.EntityFrameworkCore
+
+<PageTitle>Add Learning Entry</PageTitle>
+
+<h1>Add Learning Entry</h1>
+<p class="page-intro">Fill out the form below to capture what you learned, solved or discovered.</p>
+
+<EditForm Model="learningEntry" OnValidSubmit="HandleValidSubmit" FormName="add-learning-entry">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-card">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <InputText id="title" class="form-control" @bind-Value="learningEntry.Title" />
+        </div>
+
+        <div class="form-group">
+            <label for="module">Module</label>
+            <InputText id="module" class="form-control" @bind-Value="learningEntry.Module" />
+        </div>
+
+        <div class="form-group">
+            <label for="topic">Topic</label>
+            <InputText id="topic" class="form-control" @bind-Value="learningEntry.Topic" />
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <InputText id="category" class="form-control" @bind-Value="learningEntry.Category" />
+        </div>
+
+        <div class="form-group">
+            <label for="tags">Tags</label>
+            <InputText id="tags" class="form-control" @bind-Value="learningEntry.Tags" />
+        </div>
+
+        <div class="form-group">
+            <label for="content">Content</label>
+            <InputTextArea id="content" class="form-control" @bind-Value="learningEntry.Content" rows="6"/>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="primary-btn">Add Entry</button>
+            <a href="/learning-entries" class="secondary-btn">Back to Entries</a>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private LearningEntry learningEntry = new LearningEntry()
+    {
+        DateCreated = DateTime.UtcNow
+    };
+
+    private async Task HandleValidSubmit()
+    {
+        Context.LearningEntries.Add(learningEntry);
+        await Context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/learning-entries");
+    }
+}
