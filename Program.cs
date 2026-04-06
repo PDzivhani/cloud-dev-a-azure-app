@@ -1,10 +1,17 @@
 using MyFirstAzureWebAppNet8.Components;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Configure Entity Framework Core with SQL Server
+builder.Services.AddDbContext<CloudCanvasDbContextt>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CloudCanvasDb"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure()));
 
 var app = builder.Build();
 
