@@ -4,15 +4,15 @@
 @using MyFirstAzureWebAppNet8.Data
 @using MyFirstAzureWebAppNet8.Models
 @inject NavigationManager NavigationManager
-
 @inject CloudCanvasDbContext Context
 
 <PageTitle>Dashboard</PageTitle>
 
-<h1>CloudCanvasDashboard</h1>
+<h1>CloudCanvas Dashboard</h1>
 <p class="page-intro">
-    Welcome to the Cloud Canvas Dashboard! This is your central hub for tracking your Azure learning journey.
-    Here you can quickly see an overview of your learning progress, access your learning entries, and find resources to help you along the way.
+    Welcome to the CloudCanvas Dashboard! This is your central hub for tracking your Azure learning journey.
+    Here you can quickly see an overview of your learning progress, access your learning entries, and find resources to
+    help you along the way.
 </p>
 
 @if (isLoading)
@@ -25,8 +25,18 @@ else
 {
     <div class="dashboard-grid">
         <div class="dashboard-card stat-card">
-            <p class="stat-label">Total Learning Entries</p>
-            <h2>@totalEntries</h2>
+            <p class="stat-label">Learning Entries</p>
+            <h2>@totalLearningEntries</h2>
+        </div>
+
+        <div class="dashboard-card stat-card">
+            <p class="stat-label">Projects</p>
+            <h2>@totalProjects</h2>
+        </div>
+
+        <div class="dashboard-card stat-card">
+            <p class="stat-label">Milestones</p>
+            <h2>@totalMilestones</h2>
         </div>
 
         <div class="dashboard-card stat-card">
@@ -39,49 +49,119 @@ else
 
             <div class="dashboard-actions">
                 <a href="/learning-entries/add" class="primary-btn">Add New Entry</a>
-                <a href="/learning-entries" class="secondary-btn">View Entries</a>
+                <a href="/projects/add" class="primary-btn">Add New Project</a>
+                <a href="/milestones/add" class="primary-btn">Add New Milestone</a>
             </div>
         </div>
     </div>
 
-   <div class="dashboard-section">
-        <h2>Recent Learning Entries</h2>
+    <div class="dashboard-sections-grid">
+        <div class="dashboard-section">
+            <h2>Latest Learning Entry</h2>
 
-        @if (recentEntries == null)
-        {
-            <div class="empty-state">
-                <h3>No learning entries yet</h3>
-                <p>Start adding entries to see them listed here!</p>
-            </div>
-        }
-        else
-        {
-            <div class="dashboard-card latest-entry-card">
-                <div class="entry-meta">
-                    <span class="entry-category">@recentEntries.Category</span>
-                    <span class="entry-date">@recentEntries.DateCreated.ToLocalTime().ToString("dd/MMM/yyyy")</span>
+            @if (recentEntries == null)
+            {
+                <div class="empty-state">
+                    <h3>No learning entries yet</h3>
+                    <p>Start adding entries to see them listed here!</p>
                 </div>
+            }
+            else
+            {
+                <div class="dashboard-card latest-entry-card">
+                    <div class="entry-meta">
+                        <span class="entry-category">@recentEntries.Category</span>
+                        <span class="entry-date">@recentEntries.DateCreated.ToLocalTime().ToString("dd/MMM/yyyy")</span>
+                    </div>
 
-                <h3>@recentEntries.Title</h3>
-                <p><strong>Module:</strong>@recentEntries.Module</p>
-                <p><strong>Topic:</strong>@recentEntries.Topic</p>
-                <p class="entry-content">@recentEntries.Content</p>
+                    <h3>@recentEntries.Title</h3>
+                    <p><strong>Module:</strong>@recentEntries.Module</p>
+                    <p><strong>Topic:</strong>@recentEntries.Topic</p>
+                    <p class="entry-content">@recentEntries.Content</p>
 
-                @if (!String.IsNullOrWhiteSpace(recentEntries.Tags))
-                {
-                    <p class="entry-tags"><strong>Tags:</strong> @recentEntries.Tags</p>
-                }
-            </div>
-        }
-   </div>
+                    @if (!String.IsNullOrWhiteSpace(recentEntries.Tags))
+                    {
+                        <p class="entry-tags"><strong>Tags:</strong> @recentEntries.Tags</p>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Latest Project</h2>
+
+            @if (recentProjects == null)
+            {
+                <div class="empty-state">
+                    <h3>No projects yet</h3>
+                    <p>Start adding projects to see them listed here!</p>
+                </div>
+            }
+            else
+            {
+                <div class="dashboard-card latest-entry-card">
+                    <div class="entry-meta">
+                        <span class="entry-category">@recentProjects.Status </span>
+                        <span class="entry-date">@recentProjects.DateStarted.ToLocalTime().ToString("dd/MMM/yyyy")</span>
+                    </div>
+
+                    <h3>@recentProjects.projectName</h3>
+                    <p class="entry-content">@recentProjects.Description</p>
+
+                    @if (!String.IsNullOrWhiteSpace(recentProjects.TechStack))
+                    {
+                        <p><strong>Tech Stack:</strong> @recentProjects.TechStack</p>
+                    }
+
+                    @if (!String.IsNullOrWhiteSpace(recentProjects.AzureServices))
+                    {
+                        <p><strong>Azure Services:</strong> @recentProjects.AzureServices</p>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Latest Milestone</h2>
+
+            @if (recentMilestone == null)
+            {
+                <div class="empty-state">
+                    <h3>No milestones yet</h3>
+                    <p>Start adding milestones  to see them listed here!</p>
+                </div>
+            }
+            else
+            {
+                <div class="dashboard-card latest-entry-card">
+                    <div class="entry-meta">
+                        <span class="entry-category">@recentMilestone.milestoneCategory</span>
+                        <span class="entry-date">@recentMilestone.DateAchieved.ToLocalTime().ToString("dd/MMM/yyyy")</span>
+                    </div>
+
+                    <h3>@recentMilestone.milestoneTitle</h3>
+
+                    @if (!String.IsNullOrWhiteSpace(recentMilestone.milestoneDescription))
+                    {
+                        <p class="entry-content">@recentMilestone.milestoneDescription</p>
+                    }
+                    
+                </div>
+            }
+        </div>
+    </div>
 }
 
-@code 
+@code
 {
     private bool isLoading = true;
-    private int totalEntries;
+    private int totalLearningEntries;
+    private int totalProjects;
+    private int totalMilestones;
     private int totalCategories;
     private LearningEntry? recentEntries;
+    private Project? recentProjects;
+    private Milestone? recentMilestone;
 
     protected override async Task OnInitializedAsync()
     {
@@ -90,9 +170,18 @@ else
 
     private async Task LoadDashboardData()
     {
-        totalEntries = await Context.LearningEntries.CountAsync();
+        var learningEntries = await Context.LearningEntries.OrderByDescending(e => e.DateCreated).ToListAsync();
+        var projects = await Context.Projects.OrderByDescending(p => p.DateStarted).ToListAsync();
+        var milestones = await Context.Milestones.OrderByDescending(m => m.DateAchieved).ToListAsync();
+
+        totalLearningEntries = await Context.LearningEntries.CountAsync();
+        totalProjects = await Context.Projects.CountAsync();
+        totalMilestones = await Context.Milestones.CountAsync();
         totalCategories = await Context.LearningEntries.Select(e => e.Category).Distinct().CountAsync();
+
         recentEntries = await Context.LearningEntries.OrderByDescending(e => e.DateCreated).FirstOrDefaultAsync();
+        recentProjects = await Context.Projects.OrderByDescending(p => p.DateStarted).FirstOrDefaultAsync();
+        recentMilestone = await Context.Milestones.OrderByDescending(m => m.DateAchieved).FirstOrDefaultAsync();
 
         isLoading = false;
     }

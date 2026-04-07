@@ -1,0 +1,84 @@
+@page "/milestones"
+@rendermode InteractiveServer
+@using MyFirstAzureWebAppNet8.Data
+@using Microsoft.EntityFrameworkCore
+@using MyFirstAzureWebAppNet8.Models
+@inject CloudCanvasDbContext Context
+
+<PageTitle>Milestones</PageTitle>
+
+<h1>Milestones</h1>
+<p class="page-intro">
+    Record your progress and achievements here.
+</p>
+
+<div class="page-actions">
+    <a href="/milestones/add" class="primary-btn">Add new milestone</a>
+</div>
+
+@if (milestones == null)
+{
+    <p>
+        Loading milestones...
+    </p>
+}
+else if (!milestones.Any())
+{
+    <div class="empty-state">
+        <h3>No milestones yet</h3>
+        <p>
+            It looks like you haven't added any milestones yet. Click the button above to add your first milestone and start tracking your progress!
+        </p>
+    </div>
+}
+else
+{
+    <div class="entries-grid">
+        @foreach (var milestone in milestones.OrderByDescending(m => m.DateAchieved))
+        {
+            <div class="entry-card">
+                <div class="entry-meta">
+                    <span class="entry-category">@milestone.milestoneCategory</span>
+                    <span class="entry-date">@milestone.DateAchieved.ToLocalTime().ToString("dd-MMM-yyyy")</span>
+                </div>
+
+                <h3>@milestone.milestoneTitle</h3>
+                
+                @if (!string.IsNullOrWhiteSpace(milestone.milestoneDescription))
+                {
+                    <p class="entry-content">@milestone.milestoneDescription</p>
+                } 
+
+                <div class="entry-actions">
+                    <a href="/milestones/edit/@milestone.milestoneId" class="secondary-btn">Edit</a>
+                    <button type="button" class="delete-btn" @onclick="() => DeleteMilestone(milestone.milestoneId)">Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<Milestone>? milestones;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMilestones();
+    }
+
+    private async Task LoadMilestones()
+    {
+        milestones = await Context.Milestones.ToListAsync();
+    }
+
+    private async Task DeleteMilestone(int milestoneId)
+    {
+        var milestone = await Context.Milestones.FindAsync(milestoneId);
+        if (milestone != null)
+        {
+            Context.Milestones.Remove(milestone);
+            await Context.SaveChangesAsync();
+            await LoadMilestones();
+        }
+    }
+}

@@ -1,0 +1,64 @@
+@page "/milestones/add"
+@rendermode InteractiveServer
+@using MyFirstAzureWebAppNet8.Data
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.EntityFrameworkCore
+@using MyFirstAzureWebAppNet8.Models
+
+@inject NavigationManager NavigationManager
+@inject CloudCanvasDbContext Context
+
+<PageTitle>Add New Milestone</PageTitle>
+
+<h1>Add New Milestone</h1>
+<p class="page-intro">
+    capture your achievements and progress by adding new milestones here. Whether it's completing a project, learning a new skill, or reaching a personal goal, recording your milestones helps you celebrate your journey and stay motivated. Fill out the form below to add your latest milestone and keep track of your growth over time!
+</p>
+
+<EditForm Model="milestone" OnValidSubmit="HandleValidSubmit" FormName="add-milestone">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-card">
+        <div class="form-group">
+            <label for="milestoneTitle">Milestone Title</label>
+            <InputText id="milestoneTitle" class="form-control" @bind-Value="milestone.milestoneTitle" />
+        </div>
+
+        <div class="form-group">
+            <label for="milestoneDescription">Description</label>
+            <InputTextArea id="milestoneDescription" class="form-control" @bind-Value="milestone.milestoneDescription" />
+        </div>
+
+        <div class="form-group">
+            <label for="milestoneCategory">Category</label>
+            <InputText id="milestoneCategory" class="form-control" @bind-Value="milestone.milestoneCategory" />
+        </div>
+
+        <div class="form-group">
+            <label for="dateAchieved">Date Achieved</label>
+            <InputDate id="dateAchieved" class="form-control" @bind-Value="milestone.DateAchieved" />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="primary-btn">Add Milestone</button>
+            <a href="/milestones" class="secondary-btn">Back to Milestones</a>
+        </div>
+    </div>
+</EditForm>
+
+
+    
+@code {
+    private Milestone milestone = new Milestone()
+    {
+        DateAchieved = DateTime.UtcNow
+    };
+
+    private async Task HandleValidSubmit()
+    {
+        Context.Milestones.Add(milestone);
+        await Context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/milestones");
+    }
+}

@@ -312,3 +312,21 @@ h1:focus {
     margin-top: 0.8rem;
     margin-bottom: 0.8rem;
 }
+
+.quick-actions-card {
+    margin-bottom: 2rem;
+}
+
+.dashboard-sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.dashboard-section h2 {
+    margin-bottom: 1rem;
+    color: #0f172a;
+}
+
+

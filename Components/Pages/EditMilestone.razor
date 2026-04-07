@@ -1,0 +1,81 @@
+@page "/milestones/edit/{milestoneId:int}"
+@rendermode InteractiveServer
+@using MyFirstAzureWebAppNet8.Data
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.EntityFrameworkCore
+@using MyFirstAzureWebAppNet8.Models
+
+@inject NavigationManager NavigationManager
+@inject CloudCanvasDbContext Context
+
+<PageTitle>Edit Milestone</PageTitle>
+
+<h1>Edit Milestone</h1>
+<p class="page-intro">
+    Make changes to your milestone details and click save when you're done. Keeping your milestone information up to
+    date will help you track your progress and manage your work effectively.
+</p>
+
+@if (milestone is null)
+{
+    <p>
+        Loading milestone details...
+    </p>
+}
+else
+{
+    <EditForm Model="milestone" OnValidSubmit="HandleValidSubmit" FormName="edit-milestone">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-card">
+            <div class="form-group">
+                <label for="milestoneTitle">Milestone Title</label>
+                <InputText id="milestoneTitle" class="form-control" @bind-Value="milestone.milestoneTitle" />
+            </div>
+
+            <div class="form-group">
+                <label for="milestoneDescription">Description</label>
+                <InputTextArea id="milestoneDescription" class="form-control"
+                               @bind-Value="milestone.milestoneDescription" />
+            </div>
+
+            <div class="form-group">
+                <label for="milestoneCategory">Category</label>
+                <InputText id="milestoneCategory" class="form-control" @bind-Value="milestone.milestoneCategory" />
+            </div>
+
+            <div class="form-group">
+                <label for="dateAchieved">Date Achieved</label>
+                <InputDate id="dateAchieved" class="form-control" @bind-Value="milestone.DateAchieved" />
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="primary-btn">Save Changes</button>
+                <a href="/milestones" class="secondary-btn">Back to Milestones</a>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code
+{
+    [Parameter]
+    public int milestoneId { get; set; }
+
+    private Milestone? milestone;
+
+    protected override async Task OnInitializedAsync()
+    {
+        milestone = await Context.Milestones.FindAsync(milestoneId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (milestone is null) return;
+
+        milestone.LastUpdated = DateTime.UtcNow;
+        await Context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/milestones");
+    }
+}
