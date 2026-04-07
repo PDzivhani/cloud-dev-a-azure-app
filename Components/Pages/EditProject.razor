@@ -1,0 +1,99 @@
+@page "/projects/edit/{projectId:int}"
+@rendermode InteractiveServer
+@using MyFirstAzureWebAppNet8.Data
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.EntityFrameworkCore
+@using MyFirstAzureWebAppNet8.Models
+
+@inject NavigationManager NavigationManager
+@inject CloudCanvasDbContext Context
+
+<PageTitle>Edit Project</PageTitle>
+
+<h1>Edit Project</h1>
+<p class="page-intro">
+    Make changes to your project details and click save when you're done. Keeping your project information up to date will help you track your progress and manage your work effectively.
+</p>
+
+@if (project is null)
+{
+    <p>
+        Loading project details...
+    </p>
+}
+else
+{
+    <EditForm Model="project" OnValidSubmit="HandleValidSubmit" FormName="edit-project">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+        <div class="form-card">
+            <div class="form-group">
+            <label for="projectName">Project Name</label>
+            <InputText id="projectName" class="form-control" @bind-Value="project.projectName" />
+            </div>
+
+            <div class="form-group">
+            <label for="description">Description</label>
+            <InputTextArea id="description" class="form-control" @bind-Value="project.Description " />
+            </div>
+
+            <div class="form-group">
+            <label for="techStack">Tech Stack</label>
+            <InputText id="techStack" class="form-control" @bind-Value="project.TechStack" />
+            </div>
+
+            <div class="form-group">
+            <label for="azureServices">Azure Services</label>
+            <InputText id="azureServices" class="form-control" @bind-Value="project.AzureServices" />
+            </div>
+
+            <div class="form-group">
+            <label for="githubUrl">GitHub URL</label>
+            <InputText id="githubUrl" class="form-control" @bind-Value="project.GithubUrl" />
+            </div>
+
+            <div class="form-group">
+            <label for="liveDemoUrl">Live Demo URL</label>
+            <InputText id="liveDemoUrl" class="form-control" @bind-Value="project.LiveDemoUrl" />
+            </div>
+
+            <div class="form-group">
+            <label for="status">Status</label>
+            <InputText id="status" class="form-control" @bind-Value="project.Status" />
+            </div>
+
+            <div class="form-group">
+            <label for="dateStarted">Date Started</label>
+            <InputDate id="dateStarted" class="form-control" @bind-Value="project.DateStarted" />
+            </div>
+
+            <div class="form-actions">
+            <button type="submit" class="primary-btn">Save Changes</button>
+            <a href="/projects" class="secondary-btn">Back to Projects</a>
+            </div>
+        </div>
+    </EditForm>
+}
+@code 
+{
+    [Parameter]
+    public int projectId { get; set; }
+
+    private Project? project;
+
+    protected override async Task OnInitializedAsync()
+    {
+        project = await Context.Projects.FindAsync(projectId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (project is null) return;
+
+        project.LastUpdated = DateTime.UtcNow;
+        await Context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/projects");
+
+    }
+}

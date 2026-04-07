@@ -1,0 +1,83 @@
+@page "/projects/add"
+@rendermode InteractiveServer
+@using MyFirstAzureWebAppNet8.Data
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.EntityFrameworkCore
+@using MyFirstAzureWebAppNet8.Models
+
+@inject NavigationManager NavigationManager
+@inject CloudCanvasDbContext Context
+
+<PageTitle>Add New Project</PageTitle>
+
+<h1>Add New Project</h1>
+<p class="page-intro">
+    Use the form below to add a new project to your portfolio. Provide details such as the project name, description, tech stack, and Azure services used. Once you submit the form, your project will be added to the list of projects, and you can start tracking its progress and associated tasks.
+</p>
+
+<EditForm Model="project" OnValidSubmit="HandleValidSubmit" FormName="add-project">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-card">
+        <div class="form-group">
+            <label for="projectName">Project Name</label>
+            <InputText id="projectName" class="form-control" @bind-Value="project.projectName" />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <InputTextArea id="description" class="form-control" @bind-Value="project.Description " />
+        </div>
+
+        <div class="form-group">
+            <label for="techStack">Tech Stack</label>
+            <InputText id="techStack" class="form-control" @bind-Value="project.TechStack" />
+        </div>
+
+        <div class="form-group">
+            <label for="azureServices">Azure Services</label>
+            <InputText id="azureServices" class="form-control" @bind-Value="project.AzureServices" />
+        </div>
+
+        <div class="form-group">
+            <label for="githubUrl">GitHub URL</label>
+            <InputText id="githubUrl" class="form-control" @bind-Value="project.GithubUrl" />
+        </div>
+
+        <div class="form-group">
+            <label for="liveDemoUrl">Live Demo URL</label>
+            <InputText id="liveDemoUrl" class="form-control" @bind-Value="project.LiveDemoUrl" />
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <InputText id="status" class="form-control" @bind-Value="project.Status" />
+        </div>
+
+        <div class="form-group">
+            <label for="dateStarted">Date Started</label>
+            <InputDate id="dateStarted" class="form-control" @bind-Value="project.DateStarted" />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="primary-btn">Add Project</button>
+            <a href="/projects" class="secondary-btn">Back to Projects</a>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private Project project = new Project()
+    {
+        DateStarted = DateTime.UtcNow,
+        Status = "In Progress"
+    };
+
+    private async Task HandleValidSubmit()
+    {
+        Context.Projects.Add(project);
+        await Context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/projects");
+    }
+}

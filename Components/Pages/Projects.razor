@@ -1,0 +1,108 @@
+@page "/projects"
+@rendermode InteractiveServer
+@using MyFirstAzureWebAppNet8.Data
+@using Microsoft.EntityFrameworkCore
+@using MyFirstAzureWebAppNet8.Models
+@inject CloudCanvasDbContext Context
+
+<PageTitle>Projects</PageTitle>
+
+<h1>Projects</h1>
+<p class="page-intro">
+    Track your projects here. You can add, edit, and delete projects as needed. Each project can have multiple tasks associated with it, allowing you to manage your work effectively. Use the buttons below to get started!
+</p>
+
+<div class="page-actions">
+    <a href="/projects/add" class="primary-btn">Add new project</a>
+</div>
+
+@if (projects == null)
+{
+    <p>
+        Loading projects...
+    </p>
+}
+else if (!projects.Any())
+{
+    <div class="empty-state">
+        <h3>No projects found</h3>
+        <p>
+            It looks like you haven't added any projects yet. Click the button above to create your first project and start organizing your work!
+        </p>
+    </div>
+}
+else
+{
+    <div class="entries-grid">
+        @foreach (var project in projects.OrderByDescending(p => p.DateStarted))
+        {
+            <div class="entry-card">
+                <div class="entry-meta">
+                    <span class="entry-category">@project.Status</span>
+                    <span class="entry-date">@project.DateStarted.ToLocalTime().ToString("dd-MMM-yyyy")</span>
+                </div>
+
+                <h3>@project.projectName</h3>
+                <p class="entry-content">@project.Description</p>
+
+                 @if (!string.IsNullOrWhiteSpace(project.TechStack))
+                {
+                    <p>
+                        <strong>Tech Stack:</strong> @project.TechStack
+                    </p>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(project.AzureServices))
+                {
+                    <p>
+                        <strong>Azure Services:</strong> @project.AzureServices
+                    </p>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(project.GithubUrl))
+                {
+                    <p>
+                        <strong>GitHub URL:</strong> <a href="@project.GithubUrl" target="_blank">@project.GithubUrl</a>
+                    </p>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(project.LiveDemoUrl))
+                {
+                    <p>
+                        <strong>Live Demo:</strong> <a href="@project.LiveDemoUrl" target="_blank">@project.LiveDemoUrl</a>
+                    </p>
+                }
+
+                <div class="entry-actions">
+                    <a href="/projects/edit/@project.projectId" class="secondary-btn">Edit</a>
+                    <button type="button" class="delete-btn" @onclick="() => DeleteProject(project.projectId)">Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<Project>? projects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProjects();
+    }
+
+    private async Task LoadProjects()
+    {
+        projects = await Context.Projects.ToListAsync();
+    }
+
+    private async Task DeleteProject(int projectId)
+    {
+        var project = await Context.Projects.FindAsync(projectId);
+        if (project != null)
+        {
+            Context.Projects.Remove(project);
+            await Context.SaveChangesAsync();
+            await LoadProjects();
+        }
+    }
+}
